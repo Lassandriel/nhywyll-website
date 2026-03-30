@@ -58,10 +58,14 @@ const translations = {
         credits_title: "Credits & Acknowledgments",
         credits_artists_title: "Featured Artists",
         credits_intro: "Special thanks to the amazing artists and contributors who helped bring this website to life. Click on their names or images to visit their profiles.",
-        credits_other_title: "Other Contributors",
-        credits_icons: "Icons: Provided by various free icon libraries",
-        credits_fonts: "Fonts: Open-source fonts",
-        credits_feedback: "Feedback: Community members",
+        credit_keke_desc: "Pfp (Detail), Video Player Banner and Website background",
+        credit_rachel_desc: "Character Design and sheet, Banner Artwork, Twitch Panels and the Nhywyll Emotes.",
+        credit_tsuki_desc: "Character Art and Rigging, Text and chicken wiggle Emote.",
+        credit_luci_desc: "Logo",
+        credit_melumii_desc: "Smol Bean",
+        credit_areya_desc: "Bust",
+        credit_tron_desc: "Stained Glass",
+        easter_hint: "Psst... type 'silkie' to call the flock!",
         twitch: "Twitch",
         twitch_title: "🎮 Twitch",
         twitch_desc: "Live gaming streams, viewer events, and community night.",
@@ -149,10 +153,14 @@ const translations = {
         credits_title: "Credits & Danksagungen",
         credits_artists_title: "Vorgestellte Künstler",
         credits_intro: "Besonderer Dank geht an die fantastischen Künstler und Mitwirkenden, die geholfen haben, diese Website zum Leben zu erwecken. Klicke auf ihre Namen oder Bilder, um ihre Profile zu besuchen.",
-        credits_other_title: "Weitere Mitwirkende",
-        credits_icons: "Icons: Bereitgestellt von verschiedenen kostenlosen Bibliotheken",
-        credits_fonts: "Schriftarten: Open-Source-Fonts",
-        credits_feedback: "Feedback: Community-Mitglieder",
+        credit_keke_desc: "Profilbild (Detail), Video Player Banner und Webseiten-Hintergrund",
+        credit_rachel_desc: "Charakterdesign und Referenzbogen, Banner, Twitch-Panels und Nhywyll Emotes.",
+        credit_tsuki_desc: "Charakter-Artwork und Rigging, Text- und Hühner-Wackel-Emote.",
+        credit_luci_desc: "Logo",
+        credit_melumii_desc: "Smol Bean",
+        credit_areya_desc: "Brustbild",
+        credit_tron_desc: "Buntglas",
+        easter_hint: "Psst... tippe irgendwo 'silkie', um die Herde zu rufen!",
         twitch: "Twitch",
         twitch_title: "🎮 Twitch",
         twitch_desc: "Live-Gaming-Streams, Zuschauer-Events und Community-Nächte.",
@@ -656,3 +664,61 @@ if (document.readyState === 'loading') {
     initApp();
     initLiveWidget();
 }
+
+// --- Silkie Easter Egg Logic ---
+let secretBuffer = "";
+const targetWord = "silkie";
+
+document.addEventListener("keydown", (e) => {
+    // Only process single characters
+    if (e.key.length !== 1 || !e.key.match(/[a-z]/i)) return;
+    
+    secretBuffer += e.key.toLowerCase();
+    
+    // Keep buffer same length as targetWord
+    if (secretBuffer.length > targetWord.length) {
+        secretBuffer = secretBuffer.slice(-targetWord.length);
+    }
+    
+    if (secretBuffer === targetWord) {
+        triggerSilkieStampede();
+        secretBuffer = ""; // Reset for next time
+    }
+});
+
+function triggerSilkieStampede() {
+    const emojis = ['🐔', '🐓', '🐣', '🐥'];
+    const numChickens = 18;
+    
+    for (let i = 0; i < numChickens; i++) {
+        setTimeout(() => {
+            const chicken = document.createElement("div");
+            chicken.className = "easter-chicken";
+            
+            // Pick a random chicken emoji
+            chicken.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+            
+            // Randomly position vertically across the screen
+            const topPos = 5 + Math.random() * 85; 
+            chicken.style.top = topPos + "vh";
+            
+            // Random size for perspective
+            const size = 1.5 + Math.random() * 3;
+            chicken.style.fontSize = size + "rem";
+            
+            // Random duration so they run at different speeds
+            const duration = 2.5 + Math.random() * 4;
+            chicken.style.animationDuration = duration + "s";
+            
+            // Add to screen
+            document.body.appendChild(chicken);
+            
+            // Cleanup memory after animation completely finishes
+            setTimeout(() => {
+                chicken.remove();
+            }, duration * 1000 + 500);
+            
+        }, i * 250); // Stagger them out so it acts like a stampede
+    }
+}
+

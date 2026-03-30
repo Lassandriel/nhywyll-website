@@ -67,6 +67,11 @@
     mix-blend-mode: screen;
 }
 
+.light-theme .cursor-glow {
+    background: radial-gradient(circle, rgba(30, 130, 255, 0.35) 0%, transparent 70%);
+    mix-blend-mode: multiply;
+}
+
 .visually-hidden {
     position: absolute;
     width: 1px;
@@ -583,6 +588,25 @@ section h2 {
     text-shadow: 0 0 20px var(--accent-glow);
 }
 
+.smol-bean-img {
+    float: right;
+    max-width: 250px;
+    height: auto;
+    margin: 0 0 1rem 2rem;
+    filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.4));
+    animation: floatingHero 6s ease-in-out infinite;
+    transform-origin: center;
+}
+
+@media (max-width: 768px) {
+    .smol-bean-img {
+        float: none;
+        display: block;
+        margin: 0 auto 1.5rem auto;
+        max-width: 180px;
+    }
+}
+
 .about-text p {
     margin-bottom: 1.5rem;
     line-height: 1.8;
@@ -1095,6 +1119,13 @@ footer a:hover {
 .artist-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.artist-card-full {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
     gap: 1.5rem;
 }
 
@@ -1663,3 +1694,66 @@ body.cookie-banner-visible .live-widget {
     }
 }
 
+/* --- Silkie Easter Egg --- */
+.easter-chicken {
+    position: fixed;
+    left: -150px;
+    z-index: 9999;
+    pointer-events: none;
+    user-select: none;
+    animation: chicken-run linear forwards;
+    filter: drop-shadow(0 5px 10px rgba(0,0,0,0.5));
+}
+
+@keyframes chicken-run {
+    0% { transform: translateX(0) scaleX(-1); }
+    10% { transform: translateX(12vw) scaleX(-1) translateY(-15px); }
+    20% { transform: translateX(24vw) scaleX(-1) translateY(0); }
+    30% { transform: translateX(36vw) scaleX(-1) translateY(-15px); }
+    40% { transform: translateX(48vw) scaleX(-1) translateY(0); }
+    50% { transform: translateX(60vw) scaleX(-1) translateY(-15px); }
+    60% { transform: translateX(72vw) scaleX(-1) translateY(0); }
+    70% { transform: translateX(84vw) scaleX(-1) translateY(-15px); }
+    80% { transform: translateX(96vw) scaleX(-1) translateY(0); }
+    90% { transform: translateX(108vw) scaleX(-1) translateY(-15px); }
+    100% { transform: translateX(120vw) scaleX(-1) translateY(0); }
+}
+
+.easter-hint-container {
+    opacity: 0.15;
+    cursor: help;
+    transition: opacity 0.3s ease;
+    position: relative;
+    display: inline-block;
+    margin-left: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.easter-hint-container:hover {
+    opacity: 1;
+}
+
+.easter-tooltip {
+    position: absolute;
+    bottom: 150%;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    color: var(--text-primary);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    z-index: 100;
+}
+
+.easter-hint-container:hover .easter-tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
