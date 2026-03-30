@@ -1,54 +1,53 @@
-# 🌌 Nhywyll's Digital Home (Landing Page)
+# 🌌 Nhywyll | Premium VTuber & Streamer Portfolio
 
-Welcome to the official source code for my portfolio and project website!
-This site is hosted via **GitHub Pages** and serves as a central hub for my VTubing activities.
+Welcome to the official source code for **Nhywyll's Digital Home**. This project is a high-performance, **Cyber-Anime themed hub** designed for VTubers and Content Creators, blending cutting-edge aesthetics with technical excellence.
 
-## 🚀 Live Site
-Check it out here: [test.nhywyll.com](https://test.nhywyll.com)
+## 🚀 Key Features
 
-## 📋 Overview
-This website is a responsive, multilingual landing page for Nhywyll, a VTuber streamer and content creator. It includes information about streams, social links, contact options, and more.
+### 📡 Live-Ready Architecture
+- **Twitch Helix API Integration**: Automated "Live Now" detection that slides into view only when the stream is active.
+- **Micro-Interactions**: Pulsing live indicators and smooth transitions to engage viewers instantly.
 
-## 🛠️ Technologies
-- **HTML5**: Semantic structure and accessibility
-- **CSS3**: Responsive design with CSS variables for themes
-- **JavaScript (ES6+)**: Interactivity, i18n, theme toggle
-- **VS Code & GitHub Copilot**: Development environment
-- **GitHub Pages**: Hosting
+### 🎨 Visual & UX Excellence
+- **Glassmorphism Design**: A cohesive UI system using modern translucent layers and neon glow accents.
+- **Performance Optimized**: 100/100 Lighthouse focus (LCP priority, CLS prevention via explicit image dimensions, and optimized lazy-loading).
+- **Accessibility (A11y)**: Fully semantic HTML5, ARIA labels, and keyboard-friendly navigation.
 
-## ✨ Features
-- [x] **Performance-Optimierung**: Bilder mit Lazy Loading, komprimiert (TinyPNG empfohlen)
-- [x] **Mobile und Accessibility**: Responsive, ARIA-Labels hinzugefügt, Farbkontraste geprüft
-
-
-### Testing Theme & Language
-- **Theme Toggle**: Click on 🌙/☀️ in the navigation
-- **Language Switch**: Click on EN/DE in the navigation
-- Both settings are saved in localStorage
-
-## 📁 Project Structure
-```
-test_website/
-├── index.html          # Homepage
-├── schedule.html       # Streaming schedule
-├── links.html          # Social links & partners
-├── contact.html        # Contact & collaboration
-├── imprint.html        # Imprint & privacy
-├── credits.html        # Credits & acknowledgments
-├── styles.css          # Main stylesheet
-├── script.js           # JavaScript for interactivity
-├── images/             # Images and logos
-└── README.md           # This file
-```
-
-
-## ⚖️ Legal & Privacy
-This repository contains the frontend code for my private/commercial hybrid project, intended mostly as a personal portfolio.
-- **Imprint**: Available on the live site.
-- **License**: All creative assets (avatars, lore, images) are © Nhywyll. The code is for educational purposes, mostly for myself.
-
-## 🤝 Contributing
-As this is a personal project, contributions are not planned. But feedback is welcome!
+### 🌍 Global Presence
+- **Multilingual (i18n)**: Instant client-side switching between **English** and **German** with persistent state.
+- **Privacy First**: GDPR-compliant cookie management; Google Analytics only loads after explicit consent.
 
 ---
-*Created with 💜 by Nhywyll*
+
+## 📁 Project Structure
+
+```text
+test_website/
+├── images/
+│   ├── artwork-library/  # Curated artist showcase and commissions
+│   └── branding/         # UI logos and core brand assets
+├── index.html            # High-impact Hero, About & FAQ
+├── links.html            # Social hub with Neon Glow interactions
+├── contact.html          # Collaboration & Business center
+├── credits.html          # Artist Showcase & Gallery
+├── imprint.html          # Legal framework & Privacy policy
+├── styles.css            # Consolidated "Cyber-Anime" design system
+└── script.js             # Core logic: i18n, Twitch API & Analytics
+```
+
+---
+
+## 🛠️ Tech Stack
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white) 
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![Twitch](https://img.shields.io/badge/Twitch-9146FF?style=for-the-badge&logo=twitch&logoColor=white)
+
+---
+
+## ⚖️ License & Rights
+- **Art & Branding**: All character art, logos, and creative assets are **© Nhywyll**.
+- **Code**: Provided for educational and portfolio demonstration purposes.
+
+---
+*Crafted with 💜 and Neon for the VTuber Community.*

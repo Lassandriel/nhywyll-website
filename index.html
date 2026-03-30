@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Nhywyll - VTuber Streamer, Content Creator & Digital Artist. Join live gaming streams, watch digital art creation, and connect with the community.">
-    <meta name="keywords" content="VTuber, streamer, gaming, digital art, content creator, Twitch, YouTube, Nhywyll">
+    <meta name="description" content="Nhywyll - VTuber Streamer, Stoneblock 4 Player & Chicken Lover. Join the community for modded Minecraft survival, Silkies, and cozy gaming.">
+    <meta name="keywords" content="VTuber, streamer, modded Minecraft, Stoneblock 4, Silkies, Chicken Lover, Twitch, YouTube, Nhywyll">
     <meta name="author" content="Nhywyll">
     <meta name="robots" content="index, follow">
     
@@ -29,19 +29,18 @@
         <nav>
             <a href="index.html" class="logo-link">
                 <h1 class="visually-hidden">Nhywyll - VTuber & Content Creator</h1>
-                <img src="images/Logo.png" alt="Nhywyll Logo" class="logo" loading="eager">
+                <img src="images/Logo.png" alt="Nhywyll Logo" class="logo" loading="eager" width="125" height="125">
             </a>
             <ul>
                 <li><a href="index.html" data-i18n="nav_home">Home</a></li>
-                <li><a href="schedule.html" data-i18n="nav_schedule">Schedule</a></li>
                 <li><a href="links.html" data-i18n="nav_links">Links</a></li>
                 <li><a href="contact.html" data-i18n="nav_contact">Contact</a></li>
                 <li><a href="credits.html" data-i18n="nav_credits">Credits</a></li>
             </ul>
             <div class="nav-actions">
                 <div class="language-switcher">
-                    <button class="lang-btn active" data-lang="en" aria-label="Switch to English">EN</button>
-                    <button class="lang-btn" data-lang="de" aria-label="Switch to German">DE</button>
+                    <button class="lang-btn active" data-lang="en" aria-label="EN - Switch to English">EN</button>
+                    <button class="lang-btn" data-lang="de" aria-label="DE - Switch to German">DE</button>
                 </div>
                 <button id="theme-toggle" class="theme-btn" aria-label="Toggle theme" title="Toggle between dark and light theme">🌙</button>
                 <button id="menu-toggle" class="menu-btn" aria-label="Toggle navigation menu" aria-expanded="false">
@@ -51,42 +50,81 @@
                 </button>
             </div>
         </nav>
-        <p class="nav-slogan" data-i18n="about_subtitle">VTuber • Streamer • Content Creator</p>
     </header>
 
     <main id="main-content" tabindex="-1">
         <section class="hero-section entrance-animate">
             <div class="hero-content">
                 <div class="hero-text">
-                    <h1 class="hero-title" data-i18n="about_title">About Nhywyll</h1>
-                    <p class="hero-subtitle" data-i18n="about_subtitle">VTuber • Streamer • Content Creator</p>
-                    <div class="hero-badges">
-                        <span class="badge">Digital Artist</span>
-                        <span class="badge">Gamer</span>
-                        <span class="badge">Storyteller</span>
+                    <h1 class="hero-title entrance-animate stagger-1" data-i18n="about_title">About Nhywyll</h1>
+                    <p class="hero-subtitle entrance-animate stagger-2" data-i18n="hero_subtitle">VTuber â€¢ Streamer</p>
+                    <div class="hero-badges entrance-animate stagger-3">
+                        <span class="badge" data-i18n="hero_badge_pronouns">They/them</span>
+                        <span class="badge" data-i18n="hero_badge_gamer">Gamer</span>
+                        <span class="badge" data-i18n="hero_badge_chicken">Chicken Lover</span>
                     </div>
                 </div>
                 <div class="hero-image-wrap" style="flex-shrink: 0;">
-                    <img src="images/For pfp.png" alt="Nhywyll - VTuber and Content Creator" class="hero-image" loading="eager">
+                    <img src="images/For pfp.png" alt="Nhywyll - VTuber and Content Creator" class="hero-image" loading="eager" fetchpriority="high" width="320" height="380">
                     <div class="image-glow"></div>
                 </div>
             </div>
         </section>
 
-        <div class="about-content entrance-animate" style="animation-delay: 0.2s;">
+        <section class="about-content entrance-animate" style="animation-delay: 0.2s;">
             <div class="about-text">
                 <h2 data-i18n="who_i_am_title">Who I Am</h2>
-                <p data-i18n="who_i_am_text1">Hi there! I'm Nhywyll, a passionate VTuber and content creator who loves bringing joy and creativity to the streaming community. With years of experience in digital art and character design, I create immersive experiences that connect with my audience on a deeper level.</p>
-                <p data-i18n="who_i_am_text2">When I'm not streaming, you'll find me working on exciting new projects, collaborating with other amazing creators, or diving deep into the latest indie games. I believe in creating content that's not just entertaining, but also meaningful and inclusive for everyone.</p>
+                <p data-i18n="who_i_am_text1">...</p>
+                <p data-i18n="who_i_am_text2">...</p>
             </div>
-            <div class="about-extra entrance-animate" style="animation-delay: 0.4s;">
-                <h2 data-i18n="streaming_style_title">My Streaming Style</h2>
-                <p data-i18n="streaming_style_text">I focus on creating a welcoming environment where everyone feels comfortable joining in. Whether it's gaming sessions, digital art creation, or casual community chats, I love connecting with my viewers and building lasting relationships.</p>
+        </section>
+
+        <section class="faq-section entrance-animate" style="animation-delay: 0.4s;">
+            <div class="faq-container">
+                <h2 data-i18n="faq_title" class="section-title">Frequently Asked Questions</h2>
+                <div class="faq-grid">
+                    <div class="faq-card">
+                        <div class="faq-header">
+                            <h3 data-i18n="faq_q1">What are your pronouns?</h3>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-content">
+                            <p data-i18n="faq_a1">They/them</p>
+                        </div>
+                    </div>
+                    <div class="faq-card">
+                        <div class="faq-header">
+                            <h3 data-i18n="faq_q2">What is your favorite chicken breed?</h3>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-content">
+                            <p data-i18n="faq_a2">Silkies! :D</p>
+                        </div>
+                    </div>
+                    <div class="faq-card">
+                        <div class="faq-header">
+                            <h3 data-i18n="faq_q3">What modpack are you playing currently?</h3>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-content">
+                            <p data-i18n="faq_a3">Stoneblock 4 by FTB</p>
+                        </div>
+                    </div>
+                    <div class="faq-card">
+                        <div class="faq-header">
+                            <h3 data-i18n="faq_q4">Where are you from?</h3>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-content">
+                            <p data-i18n="faq_a4">Germany / native German speaker.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
+        </section>
     </main>
 
-    <footer>&copy; 2026 Nhywyll · All rights reserved | <a href="imprint.html" data-i18n="imprint_link">Imprint</a></footer>
+    <footer>&copy; 2026 Nhywyll &middot; All rights reserved | <a href="imprint.html#imprint" data-i18n="imprint_link">Imprint</a> &middot; <a href="imprint.html#privacy" data-i18n="privacy_link">Privacy Policy</a></footer>
 
     <button class="back-to-top" aria-label="Back to top" title="Scroll to top">↑</button>
 
