@@ -92,12 +92,14 @@ const translations = {
         privacy_full_text: "<h3>1. Data Protection at a Glance</h3><p>The following information provides a simple overview of what happens to your personal data when you visit this website. Personal data is all data with which you can be personally identified.</p><h3>2. Controller (Verantwortlicher)</h3><p>The controller for data processing on this website is:<br>Jean Ari Jäger<br>Schillerstr. 6 B<br>76726 Germersheim<br>Deutschland<br>Email: nhywyll@outlook.com</p><h3>3. Data Collection on this Website</h3><p><strong>Server Log Files:</strong> The provider of the pages automatically collects and stores information in so-called server log files, which your browser automatically transmits to us. These include: Browser type/version, OS, Referrer URL, Hostname, and Time of request. This data is not merged with other data sources. Basis: Art. 6 Para. 1 lit. f GDPR.</p><h3>4. Google Analytics 4 (GA4)</h3><p>This website uses functions of the web analysis service Google Analytics (GA4). Provider is Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Ireland. GA4 uses cookies and similar technologies to analyze website usage. Data processing is based on your consent according to Art. 6 Para. 1 lit. a GDPR. You can withdraw your consent at any time through our cookie settings.</p><h3>5. Third-Party Services</h3><p>This website links to external platforms like Twitch, YouTube, and TikTok. These providers collect data under their own responsibility. Please refer to their respective privacy policies.</p><h3>6. Your Rights</h3><p>You have the right at any time to receive information free of charge about the origin, recipient, and purpose of your stored personal data. You also have a right to request the correction or deletion of this data.</p><h3>7. Supervisory Authority</h3><p>The competent supervisory authority for data protection is: Der Landesbeauftragte für den Datenschutz und die Informationsfreiheit Rheinland-Pfalz (<a href='https://www.datenschutz.rlp.de' target='_blank' class='email-link'>https://www.datenschutz.rlp.de</a>).</p>",
         privacy_link: "Privacy",
         cookie_text: "This website uses cookies to enhance your experience. Essential cookies are necessary for the site to function, while others help us analyze usage.",
+        cookie_title: "Cookies & Privacy",
         cookie_accept_all: "Accept All",
         cookie_decline_all: "Decline All",
         cookie_settings: "Settings",
         cookie_save: "Save Selection",
         cookie_cat_essential: "Essential",
-        cookie_cat_analytics: "Analytics"
+        cookie_cat_analytics: "Analytics",
+        cookie_analytics_desc: "Allow anonymous usage analytics (Google Analytics 4)."
     },
     de: {
         page_title: "Nhywyll - VTuber Streamer & Hühnerliebhaber",
@@ -187,12 +189,14 @@ const translations = {
         privacy_full_text: "<h3>1. Datenschutz auf einen Blick</h3><p>Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen. Personenbezogene Daten sind alle Daten, mit denen Sie persönlich identifiziert werden können.</p><h3>2. Verantwortlicher</h3><p>Der Verantwortliche für die Datenverarbeitung auf dieser Website ist:<br>Jean Ari Jäger<br>Schillerstr. 6 B<br>76726 Germersheim<br>Deutschland<br>E-Mail: nhywyll@outlook.com</p><h3>3. Datenerfassung auf dieser Website</h3><p><strong>Server-Log-Dateien:</strong> Der Provider der Seiten erhebt und speichert automatisch Informationen in so genannten Server-Log-Dateien, die Ihr Browser automatisch an uns übermittelt. Dies sind: Browsertyp/version, Betriebssystem, Referrer URL, Hostname und Uhrzeit der Anfrage. Diese Daten sind nicht bestimmten Personen zuordenbar. Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO.</p><h3>4. Google Analytics 4 (GA4)</h3><p>Diese Website nutzt Funktionen des Webanalysedienstes Google Analytics (GA4). Anbieter ist die Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Ireland. GA4 verwendet Cookies und ähnliche Technologien zur Webanalyse. Die Datenverarbeitung erfolgt auf Grundlage Ihrer Einwilligung gemäß Art. 6 Abs. 1 lit. a DSGVO. Sie können Ihre Einwilligung jederzeit über unsere Cookie-Einstellungen widerrufen.</p><h3>5. Drittanbieter & Soziale Medien</h3><p>Diese Website verlinkt auf Plattformen wie Twitch, YouTube und TikTok. Diese Anbieter erheben Daten in eigener Verantwortung. Bitte informieren Sie sich in deren jeweiligen Datenschutzerklärungen.</p><h3>6. Ihre Rechte</h3><p>Sie haben jederzeit das Recht, unentgeltlich Auskunft über Herkunft, Empfänger und Zweck Ihrer gespeicherten personenbezogenen Daten zu erhalten. Sie haben außerdem ein Recht, die Berichtigung oder Löschung dieser Daten zu verlangen.</p><h3>7. Aufsichtsbehörde</h3><p>Zuständige Aufsichtsbehörde für den Datenschutz ist: Der Landesbeauftragte für den Datenschutz und die Informationsfreiheit Rheinland-Pfalz (<a href='https://www.datenschutz.rlp.de' target='_blank' class='email-link'>https://www.datenschutz.rlp.de</a>).</p>",
         privacy_link: "Datenschutz",
         cookie_text: "Diese Website verwendet Cookies, um dein Erlebnis zu verbessern. Notwendige Cookies sind für den Betrieb der Seite erforderlich, während andere uns helfen, die Nutzung zu analysieren.",
+        cookie_title: "Cookies & Datenschutz",
         cookie_accept_all: "Alle Akzeptieren",
         cookie_decline_all: "Alle Ablehnen",
         cookie_settings: "Einstellungen",
         cookie_save: "Auswahl speichern",
         cookie_cat_essential: "Notwendig",
-        cookie_cat_analytics: "Analyse"
+        cookie_cat_analytics: "Analyse",
+        cookie_analytics_desc: "Erlaubt anonyme Nutzungsanalyse (Google Analytics 4)."
     }
 };
 
@@ -394,7 +398,7 @@ if (backToTop) {
 
 function loadAnalytics() {
     if (window.gtagLoaded) return;
-    if (localStorage.getItem('analytics_consent') !== 'true') return;
+    if (localStorage.getItem('cookie_analytics_v1') !== 'true') return;
 
     const script = document.createElement('script');
     script.async = true;
@@ -408,28 +412,54 @@ function loadAnalytics() {
     window.gtagLoaded = true;
 }
 
-// Cookie Banner
-function createCookieBanner() {
-    const lang = currentLanguage;
-    const t = translations[lang];
+// Cookie Consent Banner (v1)
+function initCookieConsentBanner() {
+    const CONSENT_KEY = 'cookie_consent_v1';
+    const ANALYTICS_KEY = 'cookie_analytics_v1';
+
+    const t = translations[currentLanguage];
+    if (!t) return;
+
+    const existing = document.getElementById('cookie-consent-banner');
+    if (existing) return;
+
+    const hasConsent = localStorage.getItem(CONSENT_KEY) === 'true';
+    if (hasConsent) {
+        loadAnalytics();
+        return;
+    }
 
     const bannerHTML = `
-    <div id="cookie-banner" class="cookie-banner">
-        <div class="cookie-content">
-            <p>${t.cookie_text}</p>
-            <div id="cookie-options" class="cookie-options" style="display: none;">
-                <label class="cookie-option">
-                    <input type="checkbox" checked disabled> <span>${t.cookie_cat_essential}</span>
-                </label>
-                <label class="cookie-option">
-                    <input type="checkbox" id="consent-analytics"> <span>${t.cookie_cat_analytics}</span>
-                </label>
+    <div id="cookie-consent-banner" class="consent-banner" role="region" aria-label="Cookie consent">
+        <div class="consent-inner">
+            <div class="consent-text">
+                <p class="consent-title">${t.cookie_title || 'Cookies & Privacy'}</p>
+                <p class="consent-desc">${t.cookie_text}</p>
             </div>
-            <div class="cookie-buttons">
-                <button id="cookie-accept-all" class="cookie-btn primary">${t.cookie_accept_all}</button>
-                <button id="cookie-decline-all" class="cookie-btn">${t.cookie_decline_all}</button>
-                <button id="cookie-settings-toggle" class="cookie-btn secondary">${t.cookie_settings}</button>
-                <button id="cookie-save-settings" class="cookie-btn primary" style="display: none;">${t.cookie_save}</button>
+
+            <div class="consent-actions">
+                <button type="button" class="consent-btn primary" data-action="accept">${t.cookie_accept_all}</button>
+                <button type="button" class="consent-btn" data-action="decline">${t.cookie_decline_all}</button>
+                <button type="button" class="consent-btn secondary" data-action="settings" aria-expanded="false" aria-controls="consent-settings">
+                    ${t.cookie_settings}
+                </button>
+            </div>
+
+            <div id="consent-settings" class="consent-settings" hidden>
+                <div class="consent-setting-row">
+                    <div class="consent-setting-text">
+                        <div class="consent-setting-title">${t.cookie_cat_analytics}</div>
+                        <div class="consent-setting-sub">${t.cookie_analytics_desc || ''}</div>
+                    </div>
+                    <label class="switch" aria-label="${t.cookie_cat_analytics}">
+                        <input type="checkbox" id="consent-analytics-v1">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <div class="consent-actions consent-actions--settings">
+                    <button type="button" class="consent-btn primary" data-action="save">${t.cookie_save}</button>
+                </div>
             </div>
         </div>
     </div>
@@ -437,81 +467,46 @@ function createCookieBanner() {
 
     document.body.insertAdjacentHTML('beforeend', bannerHTML);
 
-    const banner = document.getElementById('cookie-banner');
-    const options = document.getElementById('cookie-options');
-    const btnAcceptAll = document.getElementById('cookie-accept-all');
-    const btnDeclineAll = document.getElementById('cookie-decline-all');
-    const btnSettings = document.getElementById('cookie-settings-toggle');
-    const btnSave = document.getElementById('cookie-save-settings');
-    const checkAnalytics = document.getElementById('consent-analytics');
-    const body = document.body;
+    const banner = document.getElementById('cookie-consent-banner');
+    const settings = document.getElementById('consent-settings');
+    const analyticsCheckbox = document.getElementById('consent-analytics-v1');
+    const settingsBtn = banner.querySelector('[data-action="settings"]');
 
-    // ResizeObserver to dynamically update --cookie-banner-height CSS variable
-    const cookieBannerResizeObserver = new ResizeObserver(entries => {
-        for (let entry of entries) {
-            const height = entry.contentRect.height;
-            if (height > 0) { // Only update if a valid height is measured
-                document.documentElement.style.setProperty('--cookie-banner-height', `${height}px`);
-            }
-        }
-    });
+    document.body.classList.add('consent-banner-visible');
 
-    // Function to manage banner visibility and observer state
-    const manageCookieBannerVisibility = (show) => {
-        if (show) {
-            banner.style.display = 'block';
-            document.body.classList.add('cookie-banner-visible');
-            cookieBannerResizeObserver.observe(banner); // Start observing
-        } else {
-            cookieBannerResizeObserver.disconnect(); // Stop observing
-            banner.style.display = 'none';
-            document.body.classList.remove('cookie-banner-visible');
-            document.documentElement.style.removeProperty('--cookie-banner-height');
-        }
+    const close = () => {
+        document.body.classList.remove('consent-banner-visible');
+        banner?.remove();
     };
 
-    const closeBanner = () => {
-        manageCookieBannerVisibility(false);
-    };
-
-    btnAcceptAll.addEventListener('click', () => {
-        localStorage.setItem('cookiesAccepted', 'true');
-        localStorage.setItem('analytics_consent', 'true');
-        loadAnalytics();
-        manageCookieBannerVisibility(false);
-    });
-
-    btnDeclineAll.addEventListener('click', () => {
-        localStorage.setItem('cookiesAccepted', 'true');
-        localStorage.setItem('analytics_consent', 'false');
-        manageCookieBannerVisibility(false);
-    });
-
-    btnSettings.addEventListener('click', () => {
-        options.style.display = 'block';
-        btnSave.style.display = 'inline-block';
-        btnAcceptAll.style.display = 'none';
-        btnDeclineAll.style.display = 'none';
-        btnSettings.style.display = 'none';
-        // After showing options, the banner's height might change, so ensure observer is active
-        cookieBannerResizeObserver.observe(banner);
-    });
-
-    btnSave.addEventListener('click', () => {
-        const analyticsAllowed = checkAnalytics.checked;
-        localStorage.setItem('cookiesAccepted', 'true');
-        localStorage.setItem('analytics_consent', analyticsAllowed.toString());
+    const commit = (analyticsAllowed) => {
+        localStorage.setItem(CONSENT_KEY, 'true');
+        localStorage.setItem(ANALYTICS_KEY, analyticsAllowed ? 'true' : 'false');
         if (analyticsAllowed) loadAnalytics();
-        manageCookieBannerVisibility(false);
-    });
+        close();
+    };
 
-    // Initial check and display
-    if (!localStorage.getItem('cookiesAccepted')) {
-        manageCookieBannerVisibility(true);
-    } else {
-        loadAnalytics();
-        manageCookieBannerVisibility(false);
-    }
+    banner.addEventListener('click', (e) => {
+        const btn = e.target.closest('button[data-action]');
+        if (!btn) return;
+        const action = btn.dataset.action;
+
+        if (action === 'accept') commit(true);
+        else if (action === 'decline') commit(false);
+        else if (action === 'settings') {
+            const isOpen = !settings.hasAttribute('hidden');
+            if (isOpen) {
+                settings.setAttribute('hidden', '');
+                settingsBtn.setAttribute('aria-expanded', 'false');
+            } else {
+                settings.removeAttribute('hidden');
+                settingsBtn.setAttribute('aria-expanded', 'true');
+                if (analyticsCheckbox) analyticsCheckbox.checked = localStorage.getItem(ANALYTICS_KEY) === 'true';
+            }
+        } else if (action === 'save') {
+            commit(Boolean(analyticsCheckbox?.checked));
+        }
+    });
 }
 
 // Mobile Menu Toggle logic
@@ -546,14 +541,20 @@ function initFAQ() {
             const header = e.target.closest('.faq-header');
             if (!header) return;
 
-            const card = header.parentElement;
+            const card = header.closest('.faq-card');
+            if (!card) return;
             const isActive = card.classList.contains('active');
 
             // Close other cards (optional)
-            document.querySelectorAll('.faq-card').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('.faq-card').forEach(c => {
+                c.classList.remove('active');
+                const btn = c.querySelector('.faq-header');
+                if (btn) btn.setAttribute('aria-expanded', 'false');
+            });
 
             if (!isActive) {
                 card.classList.add('active');
+                header.setAttribute('aria-expanded', 'true');
             }
         });
     }
@@ -578,7 +579,7 @@ function initCursorGlow() {
 const initApp = () => {
     setLanguage(currentLanguage);
     setTheme(currentTheme);
-    createCookieBanner();
+    initCookieConsentBanner();
     initCursorGlow();
     initFAQ();
 };
