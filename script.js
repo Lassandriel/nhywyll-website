@@ -216,34 +216,28 @@ function setLanguage(lang) {
     currentLanguage = lang;
     localStorage.setItem('language', lang);
     document.documentElement.lang = lang;
+    
+    const pageMap = {
+        'links.html': 'page_title_social',
+        'contact.html': 'page_title_contact',
+        'credits.html': 'page_title_credits',
+        'imprint.html': 'page_title_imprint'
+    };
 
-    // Set page title based on page
-    const pageKey = window.location.pathname.includes('links.html') ? 'page_title_social' :
-                   
-                    window.location.pathname.includes('contact.html') ? 'page_title_contact' :
-                    window.location.pathname.includes('credits.html') ? 'page_title_credits' :
-                    window.location.pathname.includes('imprint.html') ? 'page_title_imprint' : 'page_title';
+    const currentPage = window.location.pathname.split('/').pop();
+    const pageKey = pageMap[currentPage] || 'page_title';
     document.title = translations[lang][pageKey];
 
-    document.querySelectorAll('[data-i18n]').forEach(element => {
-        const key = element.getAttribute('data-i18n');
-        if (translations[lang][key]) {
-            element.textContent = translations[lang][key];
-        }
-    });
+    // Optimized single-pass translation
+    const elements = document.querySelectorAll('[data-i18n], [data-i18n-html], [data-i18n-placeholder]');
+    elements.forEach(el => {
+        const key = el.dataset.i18n || el.dataset.i18nHtml || el.dataset.i18nPlaceholder;
+        const translation = translations[lang][key];
+        if (!translation) return;
 
-    document.querySelectorAll('[data-i18n-html]').forEach(element => {
-        const key = element.getAttribute('data-i18n-html');
-        if (translations[lang][key]) {
-            element.innerHTML = translations[lang][key];
-        }
-    });
-
-    document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
-        const key = element.getAttribute('data-i18n-placeholder');
-        if (translations[lang][key]) {
-            element.placeholder = translations[lang][key];
-        }
+        if (el.hasAttribute('data-i18n')) el.textContent = translation;
+        else if (el.hasAttribute('data-i18n-html')) el.innerHTML = translation;
+        else if (el.hasAttribute('data-i18n-placeholder')) el.placeholder = translation;
     });
 
     document.querySelectorAll('.lang-btn').forEach(btn => {
@@ -267,11 +261,11 @@ function setLanguage(lang) {
 function updateLinks() {
     const links = document.querySelectorAll('nav a, footer a');
     links.forEach(link => {
-        if (link.href.includes('index.html') || 
-            
-            link.href.includes('links.html') || 
-            link.href.includes('contact.html') || 
-            link.href.includes('credits.html') || 
+        if (link.href.includes('index.html') ||
+
+            link.href.includes('links.html') ||
+            link.href.includes('contact.html') ||
+            link.href.includes('credits.html') ||
             link.href.includes('imprint.html')) {
             const url = new URL(link.href);
             url.searchParams.set('lang', currentLanguage);
@@ -287,7 +281,7 @@ function updateActiveNavLink() {
     document.querySelectorAll('nav ul a').forEach(link => {
         const href = link.getAttribute('href');
         if (!href) return;
-        
+
         link.classList.remove('active');
         if ((href === 'index.html' || href === '/') && (currentPath === '/' || currentPath.endsWith('index.html') || currentPath === '')) {
             link.classList.add('active');
@@ -306,18 +300,18 @@ document.querySelectorAll('.lang-btn').forEach(btn => {
 // Contact form handler
 const contactForm = document.getElementById('contact-form');
 if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
+    contactForm.addEventListener('submit', function (e) {
         e.preventDefault();
-        
+
         const name = document.getElementById('name').value;
         const email = document.getElementById('email').value;
         const message = document.getElementById('message').value;
-        
+
         const subject = `Message from ${name} via Nhywyll Website`;
         const body = `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
-        
+
         const mailtoLink = `mailto:nhywyll@outlook.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-        
+
         window.location.href = mailtoLink;
     });
 }
@@ -401,14 +395,14 @@ if (backToTop) {
 function loadAnalytics() {
     if (window.gtagLoaded) return;
     if (localStorage.getItem('analytics_consent') !== 'true') return;
-    
+
     const script = document.createElement('script');
     script.async = true;
     script.src = 'https://www.googletagmanager.com/gtag/js?id=G-8V220HC158';
     document.head.appendChild(script);
 
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
     gtag('config', 'G-8V220HC158');
     window.gtagLoaded = true;
@@ -440,9 +434,9 @@ function createCookieBanner() {
         </div>
     </div>
     `;
-    
+
     document.body.insertAdjacentHTML('beforeend', bannerHTML);
-    
+
     const banner = document.getElementById('cookie-banner');
     const options = document.getElementById('cookie-options');
     const btnAcceptAll = document.getElementById('cookie-accept-all');
@@ -450,30 +444,47 @@ function createCookieBanner() {
     const btnSettings = document.getElementById('cookie-settings-toggle');
     const btnSave = document.getElementById('cookie-save-settings');
     const checkAnalytics = document.getElementById('consent-analytics');
+    const body = document.body;
 
-    if (!localStorage.getItem('cookiesAccepted')) {
-        banner.style.display = 'block';
-        document.body.classList.add('cookie-banner-visible');
-    } else {
-        loadAnalytics();
-    }
+    // ResizeObserver to dynamically update --cookie-banner-height CSS variable
+    const cookieBannerResizeObserver = new ResizeObserver(entries => {
+        for (let entry of entries) {
+            const height = entry.contentRect.height;
+            if (height > 0) { // Only update if a valid height is measured
+                document.documentElement.style.setProperty('--cookie-banner-height', `${height}px`);
+            }
+        }
+    });
+
+    // Function to manage banner visibility and observer state
+    const manageCookieBannerVisibility = (show) => {
+        if (show) {
+            banner.style.display = 'block';
+            document.body.classList.add('cookie-banner-visible');
+            cookieBannerResizeObserver.observe(banner); // Start observing
+        } else {
+            cookieBannerResizeObserver.disconnect(); // Stop observing
+            banner.style.display = 'none';
+            document.body.classList.remove('cookie-banner-visible');
+            document.documentElement.style.removeProperty('--cookie-banner-height');
+        }
+    };
 
     const closeBanner = () => {
-        banner.style.display = 'none';
-        document.body.classList.remove('cookie-banner-visible');
+        manageCookieBannerVisibility(false);
     };
 
     btnAcceptAll.addEventListener('click', () => {
         localStorage.setItem('cookiesAccepted', 'true');
         localStorage.setItem('analytics_consent', 'true');
         loadAnalytics();
-        closeBanner();
+        manageCookieBannerVisibility(false);
     });
 
     btnDeclineAll.addEventListener('click', () => {
         localStorage.setItem('cookiesAccepted', 'true');
         localStorage.setItem('analytics_consent', 'false');
-        closeBanner();
+        manageCookieBannerVisibility(false);
     });
 
     btnSettings.addEventListener('click', () => {
@@ -482,6 +493,8 @@ function createCookieBanner() {
         btnAcceptAll.style.display = 'none';
         btnDeclineAll.style.display = 'none';
         btnSettings.style.display = 'none';
+        // After showing options, the banner's height might change, so ensure observer is active
+        cookieBannerResizeObserver.observe(banner);
     });
 
     btnSave.addEventListener('click', () => {
@@ -489,12 +502,20 @@ function createCookieBanner() {
         localStorage.setItem('cookiesAccepted', 'true');
         localStorage.setItem('analytics_consent', analyticsAllowed.toString());
         if (analyticsAllowed) loadAnalytics();
-        closeBanner();
+        manageCookieBannerVisibility(false);
     });
+
+    // Initial check and display
+    if (!localStorage.getItem('cookiesAccepted')) {
+        manageCookieBannerVisibility(true);
+    } else {
+        loadAnalytics();
+        manageCookieBannerVisibility(false);
+    }
 }
 
 // Mobile Menu Toggle logic
-(function() {
+(function () {
     const menuToggle = document.getElementById('menu-toggle');
     const navUl = document.querySelector('nav ul');
 
@@ -524,13 +545,13 @@ function initFAQ() {
         faqGrid.addEventListener('click', (e) => {
             const header = e.target.closest('.faq-header');
             if (!header) return;
-            
+
             const card = header.parentElement;
             const isActive = card.classList.contains('active');
-            
+
             // Close other cards (optional)
             document.querySelectorAll('.faq-card').forEach(c => c.classList.remove('active'));
-            
+
             if (!isActive) {
                 card.classList.add('active');
             }
@@ -541,7 +562,7 @@ function initFAQ() {
 function initCursorGlow() {
     // Check if cursor glow already exists
     if (document.querySelector('.cursor-glow')) return;
-    
+
     const glow = document.createElement('div');
     glow.className = 'cursor-glow';
     document.body.appendChild(glow);
@@ -565,6 +586,9 @@ const initApp = () => {
 /* --- Twitch Live Status & Widget --- */
 const TWITCH_CONFIG = {
     username: 'nhywyll',
+    // WARNUNG: Das Client Secret sollte niemals im Frontend stehen!
+    // Jeder Besucher deiner Website kann dieses Secret im Quellcode sehen.
+    // Empfehlung: Nutze eine Serverless Function (Backend), um den Token sicher zu generieren.
     clientId: 'y021uozyhz8nt1lgox3la49ckbzdpd',
     clientSecret: 'aughttjsh3t908lm0k0i5uuaxf7z91'
 };
@@ -587,7 +611,7 @@ async function getTwitchAccessToken() {
 
 async function checkTwitchLiveStatus() {
     if (!twitchAccessToken) await getTwitchAccessToken();
-    
+
     try {
         const response = await fetch(`https://api.twitch.tv/helix/streams?user_login=${TWITCH_CONFIG.username}`, {
             headers: {
@@ -597,7 +621,7 @@ async function checkTwitchLiveStatus() {
         });
         const data = await response.json();
         const isLive = data.data && data.data.length > 0;
-        
+
         if (isLive) {
             updateLiveWidget(data.data[0]);
         } else {
@@ -614,13 +638,14 @@ function initLiveWidget() {
         const widget = document.createElement('div');
         widget.id = 'live-widget';
         widget.className = 'live-widget';
+        // Ensure the initial HTML has the translation keys
         widget.innerHTML = `
             <div class="live-widget-header">
                 <div class="live-indicator"></div>
                 <span class="live-title" data-i18n="live_widget_title">LIVE on Twitch</span>
             </div>
             <div class="live-content">
-                <img src="images/For pfp.png" alt="Nhywyll" class="live-pfp" width="50" height="50">
+                <img src="images/Logo.png" alt="Nhywyll" class="live-pfp" width="50" height="50" loading="lazy">
                 <div class="live-info">
                     <h4 id="live-stream-title">Minecraft Adventure</h4>
                 </div>
@@ -630,20 +655,18 @@ function initLiveWidget() {
         document.body.appendChild(widget);
         setLanguage(currentLanguage); // Translate new widget
     }
-    
+
     // Initial check
     checkTwitchLiveStatus();
-    
+
     // Poll every 2 minutes
-    setInterval(checkTwitchLiveStatus, 120000);
+    return setInterval(checkTwitchLiveStatus, 120000);
 }
 
 function updateLiveWidget(streamData) {
     const widget = document.getElementById('live-widget');
-    const titleElement = document.getElementById('live-stream-title');
-    
-    if (widget && titleElement) {
-        titleElement.textContent = streamData.title || 'Live Stream';
+    if (widget) {
+        document.getElementById('live-stream-title').textContent = streamData.title || 'Live Stream';
         widget.classList.add('show');
     }
 }
@@ -658,11 +681,9 @@ function hideLiveWidget() {
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
         initApp();
-        initLiveWidget();
     });
 } else {
     initApp();
-    initLiveWidget();
 }
 
 // --- Silkie Easter Egg Logic ---
@@ -672,53 +693,58 @@ const targetWord = "silkie";
 document.addEventListener("keydown", (e) => {
     // Only process single characters
     if (e.key.length !== 1 || !e.key.match(/[a-z]/i)) return;
-    
+
     secretBuffer += e.key.toLowerCase();
-    
+
     // Keep buffer same length as targetWord
     if (secretBuffer.length > targetWord.length) {
         secretBuffer = secretBuffer.slice(-targetWord.length);
     }
-    
+
     if (secretBuffer === targetWord) {
         triggerSilkieStampede();
         secretBuffer = ""; // Reset for next time
     }
 });
 
+// Mobile-Trigger für das Easter Egg (Klick/Touch auf das Küken im Footer)
+const footerEgg = document.querySelector('.easter-hint-container');
+if (footerEgg) {
+    footerEgg.addEventListener('click', () => triggerSilkieStampede());
+}
+
 function triggerSilkieStampede() {
     const emojis = ['🐔', '🐓', '🐣', '🐥'];
     const numChickens = 18;
-    
+
     for (let i = 0; i < numChickens; i++) {
         setTimeout(() => {
             const chicken = document.createElement("div");
             chicken.className = "easter-chicken";
-            
+
             // Pick a random chicken emoji
             chicken.innerText = emojis[Math.floor(Math.random() * emojis.length)];
-            
+
             // Randomly position vertically across the screen
-            const topPos = 5 + Math.random() * 85; 
+            const topPos = 5 + Math.random() * 85;
             chicken.style.top = topPos + "vh";
-            
+
             // Random size for perspective
             const size = 1.5 + Math.random() * 3;
             chicken.style.fontSize = size + "rem";
-            
+
             // Random duration so they run at different speeds
             const duration = 2.5 + Math.random() * 4;
             chicken.style.animationDuration = duration + "s";
-            
+
             // Add to screen
             document.body.appendChild(chicken);
-            
+
             // Cleanup memory after animation completely finishes
             setTimeout(() => {
                 chicken.remove();
             }, duration * 1000 + 500);
-            
+
         }, i * 250); // Stagger them out so it acts like a stampede
     }
 }
-
