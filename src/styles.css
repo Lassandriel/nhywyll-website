@@ -1,6 +1,17 @@
 /* Google Fonts loaded via non-blocking preload link in HTML <head> */
 
 
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6, .section-title {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+}
+
 /* CSS Custom Properties for Themes */
 :root {
     --bg-primary: #050510;
@@ -667,7 +678,7 @@ section h2 {
     }
 
     .nav-actions {
-        gap: 0.3rem !important;
+        gap: 1rem !important;
     }
 
     /* --- HERO & WHO I AM (Das Skalierungs-Problem) --- */
@@ -1298,7 +1309,11 @@ footer a:hover {
         height: 100vh;
         width: 100%;
         max-width: 100%;
-        background: var(--bg-card);
+        background: var(--bg-glass);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        z-index: var(--z-menu);
+        padding-top: 4rem;
         flex-direction: column;
         justify-content: center;
         align-items: center;
@@ -1525,12 +1540,9 @@ footer a:hover {
 
 .partner-grid {
     display: grid;
-    /* Erstellt genau 2 Spalten, die sich den Platz teilen */
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
-    /* Etwas grÃ¶ÃŸerer Abstand zwischen den breiten Kacheln */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: clamp(1rem, 3vw, 1.5rem);
     justify-content: center;
-    /* Zentriert das Grid, falls der Container breiter ist */
 }
 
 /* Die Kacheln sind hier direkt die Links (<a>) */
@@ -1590,19 +1602,7 @@ footer a:hover {
     margin-top: 0.5rem;
 }
 
-/* === Responsive Design: Fürr Handys === */
-@media (max-width: 768px) {
-    .partner-grid {
-        grid-template-columns: 1fr;
-        /* Auf Handys brechen sie untereinander */
-        gap: 1rem;
-    }
-
-    .partner-card {
-        padding: 1.5rem;
-        /* Weniger Padding auf kleinen Bildschirmen */
-    }
-}
+/* Removed media query handled by auto-fit */
 
 /* FAQ Section */
 .faq-section {
