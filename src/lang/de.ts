@@ -66,7 +66,7 @@ export const de: Translation = {
     "credit_hikarimeo_desc": "Illustration",
     "credit_linked_memories_desc": "Water Skeb",
     "credit_kyandy_desc": "Illustration",
-    "easter_hint": "Psst... tippe irgendwo 'silkie', um die Herde zu rufen!",
+    "easter_hint": "Psst... klick auf das Huhn für eine Überraschung! 🐔",
     "twitch": "Twitch",
     "twitch_title": "🎮 Twitch",
     "twitch_desc": "Live-Gaming-Streams, Zuschauer-Events und Community-Nächte.",

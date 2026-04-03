@@ -71,7 +71,7 @@ export const en: Translation = {
     "credit_hikarimeo_desc": "Illustration",
     "credit_linked_memories_desc": "Water Skeb",
     "credit_kyandy_desc": "Illustration",
-    "easter_hint": "Psst... type 'silkie' to call the flock!",
+    "easter_hint": "Psst... click the chicken for a surprise! 🐔",
     "twitch": "Twitch",
     "twitch_title": "🎮 Twitch",
     "twitch_desc": "Live gaming streams, viewer events, and community night.",
