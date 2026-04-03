@@ -216,7 +216,7 @@ nav {
 /* Hero section */
 /* Hero Section */
 .hero-section {
-    max-width: 1200px;
+    max-width: 860px;
     margin: 2rem auto;
     padding: 1.5rem;
     position: relative;
@@ -228,12 +228,12 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 3rem;
+    gap: clamp(1.5rem, 4vw, 3rem);
     width: 100%;
 }
 
 .hero-title {
-    font-size: clamp(3rem, 7vw, 4.5rem);
+    font-size: clamp(2.2rem, 7vw, 4.5rem);
     font-weight: 900;
     line-height: 1.1;
     margin-bottom: 1.2rem;
@@ -246,7 +246,7 @@ nav {
 }
 
 .hero-subtitle {
-    font-size: 1.5rem;
+    font-size: clamp(1.2rem, 3vw, 1.5rem);
     color: var(--text-secondary);
     margin-bottom: 2.5rem;
     font-weight: 300;
@@ -394,7 +394,7 @@ nav {
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     color: var(--text-primary);
-    padding: 2.5rem;
+    padding: clamp(1.25rem, 4vw, 2.5rem);
     border-radius: 24px;
     border: 1px solid var(--glass-border);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
@@ -423,7 +423,7 @@ section,
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     color: var(--text-primary);
-    padding: 2.5rem;
+    padding: clamp(1.25rem, 4vw, 2.5rem);
     margin: 2rem 0;
     border-radius: 24px;
     border: 1px solid var(--glass-border);
@@ -450,7 +450,7 @@ section:hover,
 section h2 {
     text-align: center;
     margin-bottom: 3rem;
-    font-size: 2.5rem;
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
     background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -460,15 +460,15 @@ section h2 {
 .about-content {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 2rem;
-    max-width: 1200px;
-    margin: 4rem auto;
+    gap: clamp(1rem, 3vw, 2rem);
+    max-width: 860px;
+    margin: clamp(2rem, 5vw, 4rem) auto;
     padding: 0 2rem;
 }
 
 .about-text {
     background: var(--glass-reflection), var(--bg-glass);
-    padding: 3rem;
+    padding: clamp(1.5rem, 5vw, 3rem);
     border-radius: 30px;
     border: 1px solid var(--glass-border);
 }
@@ -476,7 +476,7 @@ section h2 {
 .about-extra {
     background: linear-gradient(135deg, rgba(138, 198, 255, 0.1) 0%, rgba(194, 153, 255, 0.1) 100%);
     backdrop-filter: blur(10px);
-    padding: 3rem;
+    padding: clamp(1.5rem, 5vw, 3rem);
     border-radius: 30px;
     border: 1px solid var(--accent-primary);
     display: flex;
@@ -486,7 +486,7 @@ section h2 {
 
 .about-text h3 {
     color: var(--accent-primary);
-    font-size: 1.5rem;
+    font-size: clamp(1.2rem, 3vw, 1.5rem);
     margin-bottom: 1rem;
 }
 
@@ -500,14 +500,14 @@ section h2 {
 .cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
+    gap: clamp(1rem, 3vw, 2rem);
     margin: 4rem 0;
 }
 
 .card h3 {
     color: var(--accent-primary);
     margin-bottom: 1rem;
-    font-size: 1.5rem;
+    font-size: clamp(1.2rem, 3vw, 1.5rem);
 }
 
 .card p {
@@ -598,7 +598,7 @@ section h2 {
 
 /* Icons */
 .icon {
-    font-size: 3rem;
+    font-size: clamp(2.2rem, 6vw, 3rem);
     margin-bottom: 1rem;
 }
 
@@ -642,7 +642,7 @@ section h2 {
 
 .about-text h2 {
     color: var(--accent-primary);
-    font-size: 3rem;
+    font-size: clamp(2.2rem, 6vw, 3rem);
     font-weight: 800;
     margin-bottom: 2rem;
     text-shadow: 0 0 20px var(--accent-glow);
@@ -719,6 +719,42 @@ section h2 {
     .tags {
         justify-content: center !important;
     }
+
+    .hero-badges {
+        flex-wrap: nowrap !important;
+        justify-content: center !important;
+        gap: 0.3rem !important;
+        width: 100%;
+    }
+
+    .badge {
+        padding: 0.4rem 0.6rem !important;
+        font-size: 0.7rem !important;
+        text-align: center;
+        flex: 0 1 auto;
+        white-space: nowrap;
+    }
+
+    .hero-title {
+        font-size: 2.2rem !important;
+    }
+
+    .hero-subtitle {
+        font-size: 1.1rem !important;
+    }
+
+    .glass-card, section, .section, .imprint-card, .links-card, .schedule-card, .stat-card, .artist-card, .card, .artist-card-full {
+        padding: 1.25rem !important;
+        margin: 1.5rem 0 !important;
+    }
+
+    .about-text {
+        padding: 1.25rem !important;
+    }
+
+    .stat-number {
+        font-size: 2.2rem !important;
+    }
 }
 
 .about-text p {
@@ -730,12 +766,12 @@ section h2 {
 .stats {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 2rem;
+    gap: clamp(1rem, 3vw, 2rem);
     margin: 3rem 0;
 }
 
 .stat-number {
-    font-size: 3rem;
+    font-size: clamp(2.2rem, 6vw, 3rem);
     font-weight: 900;
     color: var(--accent-primary);
     margin-bottom: 0.5rem;
@@ -753,9 +789,9 @@ section h2 {
 .schedule-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+    gap: clamp(1rem, 3vw, 2rem);
     max-width: 1200px;
-    margin: 4rem auto;
+    margin: clamp(2rem, 5vw, 4rem) auto;
     padding: 0 2rem;
 }
 
@@ -768,7 +804,7 @@ section h2 {
 }
 
 .day-name {
-    font-size: 1.5rem;
+    font-size: clamp(1.2rem, 3vw, 1.5rem);
     font-weight: bold;
     color: var(--accent-primary);
     margin-right: 1rem;
@@ -903,7 +939,7 @@ section h2 {
 /* Imprint page styles */
 .imprint-container {
     max-width: 1000px;
-    margin: 4rem auto;
+    margin: clamp(2rem, 5vw, 4rem) auto;
     padding: 0 2rem;
 }
 
@@ -1066,7 +1102,7 @@ section h2 {
 nav ul {
     display: flex;
     list-style: none;
-    gap: 2rem;
+    gap: clamp(1rem, 3vw, 2rem);
 }
 
 nav a {
@@ -1260,13 +1296,13 @@ footer a:hover {
         top: 0;
         right: -100%;
         height: 100vh;
-        width: 80%;
-        max-width: 300px;
+        width: 100%;
+        max-width: 100%;
         background: var(--bg-card);
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        gap: 2rem;
+        gap: clamp(1rem, 3vw, 2rem);
         transition: right 0.4s ease-in-out;
         box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
         margin: 0;
@@ -1504,7 +1540,7 @@ footer a:hover {
     border: 1px solid var(--border-color);
     /* Lila Rand, wie oben */
     border-radius: 14px;
-    padding: 2.5rem;
+    padding: clamp(1.25rem, 4vw, 2.5rem);
     /* Mehr Padding für ein "breiteres" Gefühl */
     text-align: center;
     text-decoration: none;
@@ -1577,7 +1613,7 @@ footer a:hover {
 
 .section-title {
     text-align: center;
-    font-size: 2.5rem;
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
     margin-bottom: 3rem;
     background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
     -webkit-background-clip: text;
@@ -1633,7 +1669,7 @@ footer a:hover {
 }
 
 .faq-icon {
-    font-size: 1.5rem;
+    font-size: clamp(1.2rem, 3vw, 1.5rem);
     color: var(--accent-primary);
     transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }

@@ -22,17 +22,21 @@ Welcome to the official source code for **Nhywyll's Digital Home**. This project
 ## 📁 Project Structure
 
 ```text
-test_website/
-├── images/
-│   ├── artwork-library/  # Curated artist showcase and commissions
-│   └── branding/         # UI logos and core brand assets
-├── index.html            # High-impact Hero, About & FAQ
-├── links.html            # Social hub with Neon Glow interactions
-├── contact.html          # Collaboration & Business center
-├── credits.html          # Artist Showcase & Gallery
-├── imprint.html          # Legal framework & Privacy policy
-├── src/main.ts           # Core logic: i18n, Twitch API & Analytics
-└── src/lang/             # Translation modules
+c:/Users/Tcul/Desktop/Test_website/
+├── public/                 # Static assets (images, logos, icons)
+│   ├── images/
+│   │   ├── Emotes/           # Live stream emotes
+│   │   ├── media/            # Social media icons
+│   │   └── artwork-library/  # Curated artist showcase and commissions
+├── src/                    # Source files for build
+│   ├── main.ts               # Core logic: i18n, Easter Eggs & UI scripts
+│   ├── styles.css            # Global modern style themes and variables
+│   └── lang/                 # Translation modules (de.ts, en.ts)
+├── index.html              # High-impact Hero, About & FAQ
+├── links.html              # Social hub with Neon Glow interactions
+├── contact.html            # Collaboration & Business center
+├── credits.html            # Artist Showcase & Gallery
+└── imprint.html            # Legal framework & Privacy policy
 ```
 
 ---
@@ -40,8 +44,8 @@ test_website/
 ## 🛠️ Tech Stack
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white) 
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
-![Twitch](https://img.shields.io/badge/Twitch-9146FF?style=for-the-badge&logo=twitch&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
 
 ---
 
