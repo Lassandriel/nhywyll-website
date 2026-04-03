@@ -376,25 +376,40 @@ function setupContactForm() {
         submitBtn?.insertAdjacentElement('afterend', successMsg);
     }
 
+    // Toggle button switching
+    const toggleBtns = form.querySelectorAll<HTMLButtonElement>('.toggle-btn');
+    toggleBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            toggleBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        });
+    });
+
     form.addEventListener('submit', (e) => {
         e.preventDefault();
 
         const name = (form.querySelector('#name') as HTMLInputElement).value.trim();
-        const email = (form.querySelector('#email') as HTMLInputElement).value.trim();
         const message = (form.querySelector('#message') as HTMLTextAreaElement).value.trim();
+        const activeToggle = form.querySelector<HTMLButtonElement>('.toggle-btn.active');
+        const inquiryType = activeToggle?.dataset.value ?? 'business';
 
-        const subject = encodeURIComponent(`Nachricht von ${name}`);
-        const body = encodeURIComponent(`Name: ${name}\nE-Mail: ${email}\n\n${message}`);
-        const mailto = `mailto:contact@nhywyll.com?subject=${subject}&body=${body}`;
+        const strings = translations[currentLanguage];
+        const subjectPrefix = strings?.['contact_subject_prefix'] ?? 'Message from';
+        const recipient = inquiryType === 'fan' ? 'fan@nhywyll.com' : 'contact@nhywyll.com';
+
+        const subject = encodeURIComponent(`${subjectPrefix} ${name}`);
+        const body = encodeURIComponent(message);
+        const mailto = `mailto:${recipient}?subject=${subject}&body=${body}`;
 
         window.location.href = mailto;
 
-        const strings = translations[currentLanguage];
-        successMsg.textContent = strings?.['contact_success'] ?? 'Message sent!';
+        successMsg.textContent = strings?.['contact_success'] ?? 'Your mail program has been opened!';
         successMsg.style.display = 'block';
         form.reset();
+        // Reset toggle back to Business
+        toggleBtns.forEach((b, i) => b.classList.toggle('active', i === 0));
 
-        setTimeout(() => { successMsg.style.display = 'none'; }, 6000);
+        setTimeout(() => { successMsg.style.display = 'none'; }, 7000);
     });
 }
 setupContactForm();
