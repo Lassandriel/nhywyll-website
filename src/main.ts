@@ -96,6 +96,7 @@ function setupTheme() {
 }
 
 // Und die Aufrufe oben in den Start-Bereich (oder ans Ende der Datei) hinzufügen:
+setupPageTransitions();
 setupNavigation();
 setupTheme();
 setupCookieBanner();
@@ -110,6 +111,37 @@ setupLanguageButtons();
     localStorage.setItem('language', lang);
     updateTexts();
 };
+
+// --- Smooth Page Transitions ---
+function setupPageTransitions() {
+    // Wenn die Seite lädt, body mit page-enter Klasse versehen
+    document.body.classList.add('page-enter');
+
+    // Alle internen Links abfangen
+    document.addEventListener('click', (e) => {
+        const target = e.target as HTMLElement;
+        const link = target.closest('a');
+
+        if (!link) return;
+
+        const href = link.getAttribute('href');
+        const targetAttr = link.getAttribute('target');
+
+        // Nur bei relativen/internen HTML-Links, die nicht im neuen Tab öffnen
+        if (href && !href.startsWith('http') && !href.startsWith('mailto:') && !href.startsWith('#') && targetAttr !== '_blank') {
+            e.preventDefault();
+            
+            // Aktuelle Animationen entfernen, Exit-Animation starten
+            document.body.classList.remove('page-enter');
+            document.body.classList.add('page-exit');
+
+            // Warten bis Animation fertig ist, dann weiterleiten
+            setTimeout(() => {
+                window.location.href = href;
+            }, 500); // Entspricht der Dauer der pageExitAnim
+        }
+    });
+}
 
 // --- Cookie Banner & Analytics ---
 function setupCookieBanner() {

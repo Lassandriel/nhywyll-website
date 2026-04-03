@@ -2122,3 +2122,93 @@ footer a:hover {
         width: 100%;
     }
 }
+
+/* === Smooth Page Transitions === */
+.page-enter {
+    animation: pageEnterAnim 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.page-exit {
+    animation: pageExitAnim 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes pageEnterAnim {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes pageExitAnim {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+}
+
+/* === Animated Border Button === */
+.btn-animated-border {
+    position: relative;
+    overflow: hidden;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    z-index: 1;
+    border: none;
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    font-weight: 700;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    font-size: 1rem;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+}
+
+.btn-animated-border::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(
+        transparent, 
+        var(--accent-primary), 
+        transparent 30%
+    );
+    animation: rotate-border 3s linear infinite;
+    z-index: -2;
+}
+
+.btn-animated-border::after {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    background: var(--bg-primary);
+    border-radius: 50px;
+    z-index: -1;
+    transition: background 0.3s ease;
+}
+
+.btn-animated-border:hover::after {
+    background: var(--bg-glass);
+}
+
+.btn-animated-border:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 10px 30px var(--accent-glow);
+}
+
+@keyframes rotate-border {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
