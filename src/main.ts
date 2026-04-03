@@ -14,13 +14,13 @@ function updateTexts() {
     }
 
     const elements = document.querySelectorAll('[data-i18n], [data-i18n-html], [data-i18n-placeholder]');
-    
+
     elements.forEach(el => {
         const htmlEl = el as HTMLElement;
         // Wir prüfen die Attribute nacheinander
-        const key = htmlEl.getAttribute('data-i18n') || 
-                    htmlEl.getAttribute('data-i18n-html') || 
-                    htmlEl.getAttribute('data-i18n-placeholder');
+        const key = htmlEl.getAttribute('data-i18n') ||
+            htmlEl.getAttribute('data-i18n-html') ||
+            htmlEl.getAttribute('data-i18n-placeholder');
 
         if (key && strings[key]) {
             if (htmlEl.hasAttribute('data-i18n')) {
@@ -88,7 +88,7 @@ function setupTheme() {
             const newTheme = isLight ? 'light' : 'dark';
             document.documentElement.dataset.theme = newTheme;
             localStorage.setItem('theme', newTheme);
-            
+
             // Icon wechseln (optional, falls du das im alten Code hattest)
             themeToggle.textContent = isLight ? '☀️' : '🌙';
         });
@@ -109,3 +109,118 @@ setupLanguageButtons();
     localStorage.setItem('language', lang);
     updateTexts();
 };
+
+// --- FAQ Accordion ---
+function setupFAQ() {
+    const buttons = document.querySelectorAll<HTMLButtonElement>('.faq-header');
+    buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const expanded = btn.getAttribute('aria-expanded') === 'true';
+            const contentId = btn.getAttribute('aria-controls');
+            const content = contentId ? document.getElementById(contentId) : null;
+
+            // Close all others first
+            buttons.forEach(other => {
+                if (other !== btn) {
+                    other.setAttribute('aria-expanded', 'false');
+                    const otherId = other.getAttribute('aria-controls');
+                    const otherContent = otherId ? document.getElementById(otherId) : null;
+                    if (otherContent) {
+                        otherContent.style.maxHeight = '0px';
+                        otherContent.style.opacity = '0';
+                    }
+                }
+            });
+
+            // Toggle current
+            btn.setAttribute('aria-expanded', (!expanded).toString());
+            if (content) {
+                if (expanded) {
+                    content.style.maxHeight = '0px';
+                    content.style.opacity = '0';
+                } else {
+                    content.style.maxHeight = '300px';
+                    content.style.opacity = '1';
+                }
+            }
+        });
+    });
+}
+setupFAQ();
+
+
+
+// --- Easter Egg Logic ---
+function setupEasterEgg() {
+    // These emoji will fly across the screen when triggered
+    const chickenEmojis = ['🐔', '🐣', '🐥', '🐤', '🦆', '🐧', '🐓', '🦅'];
+
+    const triggerEasterEgg = () => {
+        const emoji = document.createElement('span');
+        emoji.className = 'easter-chicken';
+        emoji.textContent = chickenEmojis[Math.floor(Math.random() * chickenEmojis.length)];
+        emoji.style.fontSize = (Math.floor(Math.random() * 24) + 28) + 'px';
+        emoji.style.top = Math.floor(Math.random() * 70) + 5 + '%';
+        emoji.style.bottom = 'auto';
+
+        // 50/50: go left-to-right or right-to-left
+        if (Math.random() > 0.5) {
+            emoji.style.left = '-80px';
+            emoji.style.right = 'auto';
+            emoji.style.animationName = 'chicken-run';
+        } else {
+            emoji.style.right = '-80px';
+            emoji.style.left = 'auto';
+            emoji.style.animationName = 'chicken-run-rtl';
+        }
+
+        document.body.appendChild(emoji);
+        setTimeout(() => emoji.remove(), 9000);
+    };
+
+    // Only click/tap on the easter egg hint triggers it (desktop + mobile)
+    document.querySelectorAll('.easter-hint-container').forEach(el => {
+        el.addEventListener('click', () => {
+            for (let i = 0; i < 10; i++) setTimeout(triggerEasterEgg, i * 200);
+        });
+        (el as HTMLElement).style.cursor = 'pointer';
+    });
+}
+setupEasterEgg();
+
+
+// --- Contact Form Logic ---
+function setupContactForm() {
+    const form = document.getElementById('contact-form') as HTMLFormElement;
+    if (!form) return;
+
+    let successMsg = document.querySelector('.contact-success-msg') as HTMLElement;
+    if (!successMsg) {
+        successMsg = document.createElement('p');
+        successMsg.className = 'contact-success-msg';
+        const submitBtn = form.querySelector('[type="submit"]');
+        submitBtn?.insertAdjacentElement('afterend', successMsg);
+    }
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const name = (form.querySelector('#name') as HTMLInputElement).value.trim();
+        const email = (form.querySelector('#email') as HTMLInputElement).value.trim();
+        const message = (form.querySelector('#message') as HTMLTextAreaElement).value.trim();
+
+        const subject = encodeURIComponent(`Nachricht von ${name}`);
+        const body = encodeURIComponent(`Name: ${name}\nE-Mail: ${email}\n\n${message}`);
+        const mailto = `mailto:contact@nhywyll.com?subject=${subject}&body=${body}`;
+
+        window.location.href = mailto;
+
+        const strings = translations[currentLanguage];
+        successMsg.textContent = strings?.['contact_success'] ?? 'Message sent!';
+        successMsg.style.display = 'block';
+        form.reset();
+
+        setTimeout(() => { successMsg.style.display = 'none'; }, 6000);
+    });
+}
+setupContactForm();
