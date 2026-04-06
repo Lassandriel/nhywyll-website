@@ -101,8 +101,6 @@ setupEffects();
 setupNavigation();
 setupTheme();
 setupCookieBanner();
-// START (Vite führt das Script erst aus, wenn das DOM bereit ist, 
-// daher brauchen wir hier oft kein DOMContentLoaded mehr)
 updateTexts();
 setupLanguageButtons();
 
@@ -252,8 +250,8 @@ function setupCookieBanner() {
     banner.className = 'cookie-banner glass-card entrance-animate';
     banner.innerHTML = `
         <div class="cookie-content">
-            <h3 data-i18n="cookie_title">Cookie-Einstellungen</h3>
-            <p data-i18n="cookie_text">Wir nutzen Cookies auf unserer Website...</p>
+            <h3 data-i18n="cookie_title">cookie_title</h3>
+            <p data-i18n="cookie_text">cookie_text</p>
             <div class="cookie-links">
                 <a href="imprint.html#imprint" data-i18n="imprint_link">Impressum</a> |
                 <a href="imprint.html#privacy" data-i18n="privacy_link">Datenschutz</a>
@@ -270,7 +268,7 @@ function setupCookieBanner() {
     const closeBanner = (status: 'all' | 'essential') => {
         localStorage.setItem('cookieConsent', status);
         banner.style.opacity = '0';
-        banner.style.transform = 'translateY(100%)';
+        banner.style.transform = 'translateY(90%)';
         setTimeout(() => banner.remove(), 400);
         if (status === 'all') initAnalytics();
     };

@@ -1861,8 +1861,8 @@ footer a:hover {
 
 /* === Cookie Banner (DSGVO) === */
 .cookie-banner {
-    position: fixed;
-    bottom: 20px;
+    position: sticky;
+    bottom: 15px;
     left: 0;
     right: 0;
     margin: 0 auto;
