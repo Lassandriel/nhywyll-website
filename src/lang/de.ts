@@ -35,7 +35,7 @@ export const de: Translation = {
     "contact_title": "Kontakt & Zusammenarbeit",
     "contact_business_title": "Business & Partnerschaft",
     "contact_business_email": "E-Mail: <a href='mailto:contact@nhywyll.com' class='email-link'>contact@nhywyll.com</a>",
-    "contact_business_text": "Für Sponsorings, Event-Anfragen und kreative Kooperationen stehe ich gerne zur Verfügung. Ein umfassendes Media Kit - mit Reichweite, Demografie und Brand-Assets - ist auf Anfrage erhältlich.",
+    "contact_business_text": "Für Sponsorings, Event-Anfragen und kreative Kooperationen stehe ich gerne zur Verfügung. Ein Media Kit - mit Reichweite, Demografie und mehr - ist auf Anfrage erhältlich.",
     "contact_fan_title": "Fan- & Stream-Support",
     "contact_fan_email": "E-Mail: <a href='mailto:fan@nhywyll.com' class='email-link'>fan@nhywyll.com</a>",
     "contact_fan_text": "Fanart gemacht oder etwas Besonderes kreiert? Meld dich! Wir suchen außerdem immer aktive Menschen, die die Community mitgestalten möchten - sei es als Mod, Event-Helfer oder hinter den Kulissen.",
@@ -100,5 +100,6 @@ export const de: Translation = {
     "cookie_text": "Wir nutzen Cookies auf unserer Website. Einige von ihnen sind essenziell, während andere uns helfen, diese Website und Ihre Erfahrung zu verbessern (z. B. Google Analytics). Sie können Ihre Einwilligung jederzeit widerrufen.",
     "cookie_accept": "Alle akzeptieren",
     "cookie_reject": "Nur essenzielle",
-    "cookie_settings_link": "Cookie-Einstellungen"
+    "cookie_settings_link": "Cookie-Einstellungen",
+    "contact_privacy_notice": "Mit dem Absenden der Nachricht erklärst du dich mit der Verarbeitung deiner Daten gemäß der <a href='imprint.html#privacy' class='email-link' style='font-size: 0.8rem;'>Datenschutzerklärung</a> einverstanden."
 };

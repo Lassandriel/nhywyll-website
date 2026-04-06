@@ -118,8 +118,9 @@ h1, h2, h3, h4, h5, h6, .section-title {
     --accent-primary: #667eea;
     --accent-secondary: #764ba2;
     --accent-glow: rgba(102, 126, 234, 0.2);
-    --border-color: rgba(0, 0, 0, 0.1);
-    --glass-border: rgba(255, 255, 255, 0.4);
+    --border-color: rgba(0, 0, 0, 0.15);
+    --glass-border: rgba(0, 0, 0, 0.12);
+    --input-bg: rgba(0, 0, 0, 0.04);
 }
 
 /* Skip link */
@@ -238,7 +239,7 @@ header {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        max-width: 1200px;
+        max-width: 1300px;
         gap: 8px;
         width: 100%;
         padding: 0.5rem 1.5rem;
@@ -869,7 +870,7 @@ section,
     & select {
         width: 100%;
         padding: 1rem 0.7rem;
-        background: rgba(255, 255, 255, 0.05);
+        background: var(--input-bg, rgba(255, 255, 255, 0.05));
         border: 1px solid var(--glass-border);
         border-radius: 15px;
         color: var(--text-primary);
@@ -909,7 +910,7 @@ section,
 /* Toggle group (Business / Fan selector) */
 .toggle-group {
     display: flex;
-    background: rgba(255, 255, 255, 0.04);
+    background: var(--input-bg, rgba(255, 255, 255, 0.04));
     border: 1px solid var(--glass-border);
     border-radius: 15px;
     overflow: hidden;
@@ -1079,41 +1080,61 @@ section,
 
 .social-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    column-gap: 1.25rem;
-    row-gap: 0rem;
-    padding: 0 clamp(0rem, 5vw, 5rem);
+    /* Etwas kleinere Kacheln für echtes Grid-Feeling */
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.5rem;
+    padding: 0 clamp(0rem, 3vw, 3.5rem);
 }
 
 .links-card {
     display: flex;
     flex-direction: column;
-
-    & p {
-        flex-grow: 1;
-        margin-bottom: 1rem;
-    }
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1 / 1;
+    background: var(--bg-glass);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 1.5rem;
+    text-decoration: none;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    text-align: center;
+    box-sizing: border-box;
 
     & h2 {
-        margin-bottom: 0.75rem;
+        margin-top: 0.5rem;
+        margin-bottom: 0;
         color: #ffd166;
+        font-size: 1.3rem;
+        font-weight: 700;
+        transition: all 0.3s ease;
     }
 
-    & a {
-        color: #ffffff;
-        display: inline-block;
-        margin-top: auto;
-        text-decoration: underline;
-        text-underline-offset: 3px;
-        border: 1px solid var(--accent-primary);
-        background: rgba(102, 126, 234, 0.15);
-        padding: 0.5rem 1rem;
-        border-radius: 8px;
+    &:hover {
+        transform: translateY(-8px) scale(1.03);
+        background: rgba(255, 255, 255, 0.08); /* Heller im Hover */
+        border-color: var(--accent-primary);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 0 0 25px var(--accent-glow);
 
-        &:hover {
-            background: rgba(102, 126, 234, 0.3);
+        & h2 {
             color: #fff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
         }
+
+        & .social-icon {
+            transform: scale(1.15);
+            filter: drop-shadow(0 0 10px var(--accent-glow));
+        }
+    }
+
+    /* Damit Icons in den Kacheln gut aussehen */
+    & .social-icon {
+        width: 64px;
+        height: 64px;
+        margin: 0 0 0.5rem 0;
+        transition: transform 0.4s ease, filter 0.4s ease;
     }
 }
 
@@ -1382,13 +1403,14 @@ footer {
 /* Credits page styles */
 .artist-section h2 {
     color: var(--text-primary);
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
 }
 
 .artist-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 1.5rem;
+    align-items: start;
 }
 
 .artist-card-full {
@@ -1513,7 +1535,7 @@ footer {
 
 /* Social subtitle */
 .social-subtitle {
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
     color: var(--text-secondary);
 }
 
@@ -1860,10 +1882,6 @@ footer {
     align-items: center;
     gap: 15px;
     margin-bottom: 1.5rem;
-
-    & h2 {
-        flex-shrink: 0;
-    }
 }
 
 .faq-container .title-with-emote {
@@ -1999,14 +2017,18 @@ footer {
 
 .feather-particle {
     position: absolute;
-    width: 10px;
-    height: 15px;
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%238ac6ff" opacity="0.4"><path d="M12 2c0 0-4.5 3-5 9s3 8 5 11c2-3 5-5 5-11s-5-9-5-9zm0 18c-1.5-2.5-3-4-3-7s2-5 3-7c1 2 3 4 3 7s-1.5 4.5-3 7z"/></svg>');
+    width: 20px;
+    height: 30px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%238ac6ff" opacity="0.6"><path d="M12 2c0 0-4.5 3-5 9s3 8 5 11c2-3 5-5 5-11s-5-9-5-9zm0 18c-1.5-2.5-3-4-3-7s2-5 3-7c1 2 3 4 3 7s-1.5 4.5-3 7z"/></svg>');
     background-size: contain;
     background-repeat: no-repeat;
     opacity: 0;
     animation: float-feather linear infinite;
     filter: drop-shadow(0 0 3px var(--accent-glow));
+
+    .light-theme & {
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23667eea" opacity="0.8"><path d="M12 2c0 0-4.5 3-5 9s3 8 5 11c2-3 5-5 5-11s-5-9-5-9zm0 18c-1.5-2.5-3-4-3-7s2-5 3-7c1 2 3 4 3 7s-1.5 4.5-3 7z"/></svg>');
+    }
 }
 
 @keyframes float-feather {
