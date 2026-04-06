@@ -1073,17 +1073,17 @@ section,
 /* Links page styles */
 
 .links-container {
-    max-width: 1100px;
+    max-width: 860px;
     margin: 3rem auto;
-    padding: 0 1rem;
+    padding: 0 1.5rem;
 }
 
 .social-grid {
     display: grid;
-    /* Etwas kleinere Kacheln für echtes Grid-Feeling */
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    /* Etwas schmalere Kacheln, damit sie im 860px Container besser wirken */
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
     gap: 1.5rem;
-    padding: 0 clamp(0rem, 3vw, 3.5rem);
+    padding: 0; /* Padding wird jetzt vom Container übernommen */
 }
 
 .links-card {
