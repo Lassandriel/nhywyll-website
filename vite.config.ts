@@ -10,6 +10,7 @@ export default defineConfig({
         contact: 'contact.html',
         credits: 'credits.html',
         imprint: 'imprint.html',
+        notFound: '404.html',
       },
     },
   },

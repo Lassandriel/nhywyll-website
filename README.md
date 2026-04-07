@@ -54,6 +54,55 @@ test_website/
 
 ---
 
+## ⚡ Getting Started
+
+### 📦 Prerequisites
+- **Node.js**: v18 or later (v20+ recommended)
+- **Git**: For version control and deployment
+
+### 🏗️ Installation & Setup
+1. **Clone the Repo**:
+   ```bash
+   git clone <repository-url>
+   cd <project-folder>
+   ```
+2. **Install Dependencies**:
+   ```bash
+   npm install
+   ```
+3. **Launch local Workspace**:
+   ```bash
+   npm run dev
+   ```
+
+---
+
+## 📜 Available Commands
+
+| Command | Description |
+| :--- | :--- |
+| `npm run dev` | Spins up the **Vite dev server** with Hot Module Replacement (HMR). |
+| `npm run build` | Compiles TypeScript and builds the project for production. |
+| `npm run preview` | Run the local **Production Preview** to test final assets. |
+| `npm run deploy:prod` | Automated pipeline: Switches CNAME, pushes to Production Repo & reverts to Test. |
+
+---
+
+## 🧩 Maintenance & Updates
+
+### 🌍 Adding/Editing Translations
+The project uses a custom i18n system. To add a new language:
+1. Create a `src/lang/[lang-code].ts` file based on `en.ts`.
+2. Register the new language module in `src/lang/index.ts`.
+3. The UI will automatically pick up the new keys via `data-i18n` attributes.
+
+### 🔍 SEO & Sitemap
+Each page has a dedicated `<title>` and `<meta description>` in the root HTML files. After adding a new page, remember to update:
+1. **`public/sitemap.xml`**: Manually add the new URL for indexing.
+2. **`vite.config.ts`**: Register the new file in the `rollupOptions.input` object.
+
+---
+
 ## ⚙️ Deployment
 
 The project uses a two-stage deployment process via GitHub Pages:
