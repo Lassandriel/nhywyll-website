@@ -2,6 +2,9 @@
 
 **Live:** [nhywyll.com](https://nhywyll.com) | **Test/Staging:** [test.nhywyll.com](https://test.nhywyll.com)
 
+[![Development Guide](https://img.shields.io/badge/📖_Development-Guide-blueviolet?style=for-the-badge)](./DEVELOPMENT.md)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](./LICENSE)
+
 Welcome to the official source code for **Nhywyll's Digital Home**. This project is a high-performance, **Cyber-Anime themed hub** designed for VTubers and Content Creators, blending cutting-edge aesthetics with technical excellence.
 
 ---
