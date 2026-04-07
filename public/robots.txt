@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://nhywyll.com/sitemap.xml
+Sitemap: https://nhywyll.com/sitemap.xml

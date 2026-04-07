@@ -51,8 +51,9 @@ c:/Users/Tcul/Desktop/Test_website/
 ---
 
 ## ⚖️ License & Rights
-- **Art & Branding**: All character art, logos, and creative assets are **© Nhywyll**.
-- **Code**: Provided for educational and portfolio demonstration purposes.
+- **Character Art & Branding**: All original character designs, unique branding assets, and custom illustrations are **© Nhywyll**.
+- **Third-Party Logos**: All platform logos (Twitch, YouTube, Bluesky, Razer, etc.) are the property of their respective trademark holders and are used solely for identification and linking purposes.
+- **Code**: The website architecture is provided for educational and portfolio demonstration purposes.
 
 ---
-*Crafted with 💜 and Neon for the VTuber Community.*
+*Crafted with 💜 by Nhywyll*
