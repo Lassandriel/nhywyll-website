@@ -4,14 +4,11 @@ Welcome to the official source code for **Nhywyll's Digital Home**. This project
 
 ## 🚀 Key Features
 
-### 📡 Live-Ready Architecture
-- **Twitch Helix API Integration**: Automated "Live Now" detection that slides into view only when the stream is active.
-- **Micro-Interactions**: Pulsing live indicators and smooth transitions to engage viewers instantly.
-
 ### 🎨 Visual & UX Excellence
 - **Glassmorphism Design**: A cohesive UI system using modern translucent layers and neon glow accents.
 - **Performance Optimized**: 100/100 Lighthouse focus (LCP priority, CLS prevention via explicit image dimensions, and optimized lazy-loading).
 - **Accessibility (A11y)**: Fully semantic HTML5, ARIA labels, and keyboard-friendly navigation.
+- **Micro-Interactions**: Smooth hover states, bird-track click effects, and feather particle backgrounds.
 
 ### 🌍 Global Presence
 - **Multilingual (i18n)**: Instant client-side switching between **English** and **German** with persistent state.
@@ -23,20 +20,24 @@ Welcome to the official source code for **Nhywyll's Digital Home**. This project
 
 ```text
 c:/Users/Tcul/Desktop/Test_website/
-├── public/                 # Static assets (images, logos, icons)
+├── public/                 # Static assets (images, logos, icons, fonts)
 │   ├── images/
 │   │   ├── Emotes/           # Live stream emotes
 │   │   ├── media/            # Social media icons
 │   │   └── artwork-library/  # Curated artist showcase and commissions
+│   ├── fonts/              # Local typography (Outfit)
+│   ├── sitemap.xml         # SEO engine optimization
+│   └── robots.txt          # Crawler instructions
 ├── src/                    # Source files for build
-│   ├── main.ts               # Core logic: i18n, Easter Eggs & UI scripts
+│   ├── main.ts               # Core logic: i18n, Transitions, Effects & UI
 │   ├── styles.css            # Global modern style themes and variables
 │   └── lang/                 # Translation modules (de.ts, en.ts)
 ├── index.html              # High-impact Hero, About & FAQ
 ├── links.html              # Social hub with Neon Glow interactions
 ├── contact.html            # Collaboration & Business center
 ├── credits.html            # Artist Showcase & Gallery
-└── imprint.html            # Legal framework & Privacy policy
+├── imprint.html            # Legal framework & Privacy policy
+└── 404.html                # Custom error page
 ```
 
 ---
