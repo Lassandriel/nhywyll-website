@@ -1366,9 +1366,10 @@ nav {
   transition: all 0.2s;
   font-family: inherit;
   font-size: 0.95rem;
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: auto 1fr 20px;
   align-items: center;
+  gap: 12px;
 }
 
 .lang-opt:hover {
@@ -1383,7 +1384,9 @@ nav {
 
 .lang-opt.active::after {
   content: "✓";
+  grid-column: 3;
   font-size: 0.8rem;
+  justify-self: end;
 }
 
 .theme-btn {
@@ -2407,4 +2410,23 @@ footer {
   100% {
     transform: rotate(360deg);
   }
+}
+
+/* --- Language Flag Icons --- */
+.flag-icon {
+  width: 1.4rem;
+  height: 1rem;
+  object-fit: cover;
+  border-radius: 2px;
+  margin-right: 12px;
+  vertical-align: middle;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
+}
+
+.active-lang .flag-icon {
+  margin-right: 0;
+  width: 1.5rem;
+  height: 1.1rem;
 }

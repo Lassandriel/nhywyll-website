@@ -45,24 +45,32 @@ function updateTexts() {
     updateLanguageUI();
 }
 
-// Dropdown UI aktualisieren (Nur Flagge im Button und aktive Klasse im Menü)
 function updateLanguageUI() {
     const activeLangSpan = document.querySelector('.active-lang');
     if (activeLangSpan) {
-        const flags: Record<string, string> = {
-            'en': '🇺🇸',
-            'de': '🇩🇪'
-        };
-        activeLangSpan.textContent = flags[currentLanguage] || currentLanguage.toUpperCase();
+        // Hier wird NUR die Flagge gesetzt, der Pfeil ist ein Geschwister-Element in header.html
+        activeLangSpan.innerHTML = `<img src="images/flags/${currentLanguage}.svg" alt="${currentLanguage}" class="flag-icon">`;
     }
 
     const options = document.querySelectorAll('.lang-opt');
     options.forEach(opt => {
-        const lang = (opt as HTMLElement).dataset.lang;
+        const htmlOpt = opt as HTMLElement;
+        const lang = htmlOpt.dataset.lang;
+        
+        // Update selection state
         if (lang === currentLanguage) {
-            opt.classList.add('active');
+            htmlOpt.classList.add('active');
         } else {
-            opt.classList.remove('active');
+            htmlOpt.classList.remove('active');
+        }
+
+        // Add flag icon to option if not already present
+        if (lang && !htmlOpt.querySelector('.flag-icon')) {
+            const flagImg = document.createElement('img');
+            flagImg.src = `images/flags/${lang}.svg`;
+            flagImg.className = 'flag-icon';
+            flagImg.alt = lang;
+            htmlOpt.prepend(flagImg);
         }
     });
 }
