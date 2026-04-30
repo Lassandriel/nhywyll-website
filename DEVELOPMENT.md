@@ -52,10 +52,11 @@ The project uses a custom i18n system. To add a new language:
 
 ### 🔍 SEO & Sitemap
 
-Each page has a dedicated `<title>` and `<meta description>` in the root HTML files. After adding a new page, remember to update:
+Each page has a dedicated `<title>` and `<meta description>` in the root HTML files. 
 
-1. **`public/sitemap.xml`**: Manually add the new URL for indexing.
-2. **`vite.config.ts`**: Register the new file in the `rollupOptions.input` object.
+**Automatisierung:**
+- **Entry Points:** Das System erkennt neue HTML-Dateien im Hauptverzeichnis automatisch. Du musst die `vite.config.ts` **nicht** mehr manuell anpassen.
+- **Sitemap:** Die **`sitemap.xml`** wird bei jedem Build automatisch generiert und enthält alle gefundenen Seiten.
 
 ---
 
